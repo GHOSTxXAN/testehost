@@ -60,14 +60,6 @@ section {
     margin: 40px 0;
 }
 
-section h1 {
-    color: white;
-}
-
-section p {
-    color: white;
-}
-
 .panel {
     border: 2px solid #ffffff;
     border-radius: 5px;
@@ -101,11 +93,71 @@ section p {
     max-height: 300px; 
 }
 
+.showcase {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.box {
+    background-color: #2A2A3F;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #fff;
+    text-align: center;
+    width: 100px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.box:hover {
+    transform: scale(1.1);
+    background-color: #3A3A5F;
+}
+
 .hidden {
-    display: none; /* Oculta o conteúdo */
+    display: none;
 }
 
-.visible {
-    display: block; /* Exibe o conteúdo */
+
+
+.showcase {
+    display: flex; /* Ativa flexbox */
+    justify-content: space-around; /* Espaçamento uniforme entre as box */
+    align-items: flex-start; /* Alinha as box ao topo */
+    gap: 20px; /* Espaço entre as box */
+    flex-wrap: wrap; /* Permite que as box quebrem linha se necessário */
+    width: 100%; /* Garante que use toda a largura disponível */
 }
 
+
+    
+/* Estilo das Box */
+.box {
+    background-color: #2A2A3F;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #fff;
+    text-align: center;
+    width: 150px; /* Define uma largura fixa */
+    height: 200px; /* Define uma altura fixa */
+    display: flex;
+    flex-direction: column; /* Alinha itens verticalmente */
+    justify-content: flex-start; /* Mantém itens no topo */
+    align-items: center; /* Centraliza itens horizontalmente */
+}
+
+/* Estilo das Imagens */
+.box img {
+    max-width: 100%;
+    max-height: 80px; /* Limita a altura das imagens */
+    margin-bottom: 10px; /* Espaço entre imagem e texto */
+    object-fit: contain; /* Ajusta tamanho da imagem */
+}
+
+.box p {
+    margin-top: auto; /* Faz o texto ocupar o espaço restante sem alterar a posição das imagens */
+}
