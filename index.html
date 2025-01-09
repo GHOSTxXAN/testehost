@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fórum de Programadores</title>
-    <link rel="stylesheet" href="stiles.css">
+    <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="https://i.ibb.co/q5Tdp18/logo.png" type="image/png">
 </head>
 <body>
@@ -83,26 +83,72 @@
 
         // Adiciona eventos às opções do menu
         document.querySelectorAll('.menu-link').forEach(link => {
-            link.addEventListener('click', (event) => {
-                event.preventDefault(); // Evita navegação padrão
+    link.addEventListener('click', (event) => {
+        event.preventDefault();
 
-                // Esconde todas as seções
-                document.querySelectorAll('section').forEach(section => {
-                    section.classList.add('hidden');
-                });
+        // Esconde todas as seções
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('hidden');
+        });
 
-                // Mostra a seção correspondente
-                const target = document.querySelector(link.getAttribute('href'));
-                target.classList.remove('hidden');
-            });
+        // Mostra a seção correspondente e garante que ela ocupe o espaço total
+        const target = document.querySelector(link.getAttribute('href'));
+        target.classList.remove('hidden');
+        target.style.minHeight = "100vh"; // Garante altura mínima de uma tela
+    });
+
+
         });
 
         // Painel expansível
-        document.querySelectorAll('.panel').forEach(panel => {
-            panel.addEventListener('click', () => {
-                panel.classList.toggle('expanded');
-            });
+        document.querySelectorAll('.panel-header').forEach(panelHeader => {
+    panelHeader.addEventListener('click', () => {
+        const panel = panelHeader.parentElement;
+
+        // Alterna entre expandido e recolhido
+        if (panel.classList.contains('expanded')) {
+            panel.classList.remove('expanded');
+            panel.querySelector('.panel-content').style.maxHeight = '0';
+        } else {
+            panel.classList.add('expanded');
+            panel.querySelector('.panel-content').style.maxHeight = 
+                panel.querySelector('.panel-content').scrollHeight + 'px';
+        }
+    });
+});
+
+// Função para simular abertura na aba ativa
+document.querySelectorAll('.menu-link').forEach(link => {
+    link.addEventListener('click', (event) => {
+        event.preventDefault();
+
+        // Esconde todas as seções
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('hidden');
         });
+
+        // Mostra a seção correspondente
+        const target = document.querySelector(link.getAttribute('href'));
+        target.classList.remove('hidden');
+
+        // Encontra o painel na seção e aplica a animação de abertura
+        const panel = target.querySelector('.panel');
+        const panelContent = panel.querySelector('.panel-content');
+
+        if (panel && panelContent) {
+            // Certifique-se de que o painel está inicialmente fechado
+            panelContent.style.maxHeight = '0';
+
+            // Aguarde um pequeno tempo para iniciar a animação de abrir
+            setTimeout(() => {
+                panel.classList.add('expanded');
+                panelContent.style.maxHeight = panelContent.scrollHeight + 'px'; // Ajusta para a altura do conteúdo
+            }, 100); // Pequeno atraso para parecer natural
+        }
+    });
+});
+
+
     </script>
 </body>
 </html>
