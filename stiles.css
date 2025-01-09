@@ -81,17 +81,16 @@ section {
 .panel-content {
     max-height: 0;
     overflow: hidden;
-    color: #CCCCCC;
-    transition: max-height 0.3s ease;
+    transition: max-height 0.3s ease; /* Suaviza a expansão */
+}
+.panel.expanded .panel-content {
+    max-height: none; /* Expande completamente */
 }
 
 .panel:hover {
     background-color: #2A2A3F;
 }
 
-.panel.expanded .panel-content {
-    max-height: 300px; 
-}
 
 .showcase {
     display: flex;
@@ -101,21 +100,14 @@ section {
     margin-top: 10px;
 }
 
-.box {
-    background-color: #2A2A3F;
-    color: white;
-    padding: 15px;
-    border-radius: 5px;
-    border: 1px solid #fff;
-    text-align: center;
-    width: 100px;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-}
 
 .box:hover {
-    transform: scale(1.1);
-    background-color: #3A3A5F;
+    transform: scale(1.2); /* Faz a box crescer */
+    z-index: 10; /* Coloca a box acima das outras */
+    overflow: visible; /* Permite que o conteúdo cresça */
 }
+
+
 
 .hidden {
     display: none;
@@ -124,31 +116,16 @@ section {
 
 
 .showcase {
-    display: flex; /* Ativa flexbox */
-    justify-content: space-around; /* Espaçamento uniforme entre as box */
-    align-items: flex-start; /* Alinha as box ao topo */
-    gap: 20px; /* Espaço entre as box */
-    flex-wrap: wrap; /* Permite que as box quebrem linha se necessário */
-    width: 100%; /* Garante que use toda a largura disponível */
+    display: flex;
+    flex-wrap: wrap; /* Permite quebra de linha */
+    gap: 15px; /* Espaçamento entre as box */
+    justify-content: center; /* Centraliza as box */
+    align-items: center; /* Alinha verticalmente */
+    position: relative; /* Necessário para o comportamento das box */
 }
 
 
     
-/* Estilo das Box */
-.box {
-    background-color: #2A2A3F;
-    color: white;
-    padding: 15px;
-    border-radius: 5px;
-    border: 1px solid #fff;
-    text-align: center;
-    width: 150px; /* Define uma largura fixa */
-    height: 200px; /* Define uma altura fixa */
-    display: flex;
-    flex-direction: column; /* Alinha itens verticalmente */
-    justify-content: flex-start; /* Mantém itens no topo */
-    align-items: center; /* Centraliza itens horizontalmente */
-}
 
 /* Estilo das Imagens */
 .box img {
@@ -161,3 +138,43 @@ section {
 .box p {
     margin-top: auto; /* Faz o texto ocupar o espaço restante sem alterar a posição das imagens */
 }
+
+.box {
+    background-color: #2A2A3F;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #fff;
+    text-align: center;
+    width: 200px; /* Tamanho inicial */
+    height: 200px; /* Tamanho inicial */
+    margin: 10px;
+    position: relative; /* Para alinhar ao seu container pai */
+    transition: transform 0.3s ease, z-index 0.3s ease; /* Suaviza o crescimento */
+    z-index: 1; /* Mantém o layout inicial */
+    overflow: hidden; /* Garante que conteúdo extra fique contido inicialmente */
+}
+
+.panel-content {
+    max-height: none; /* Remove o limite de altura */
+    overflow: visible; /* Permite que o conteúdo cresça */
+}
+
+.showcase {
+    display: flex;
+    flex-wrap: wrap; /* Permite quebra de linha */
+    gap: 15px; /* Espaçamento entre as box */
+    justify-content: center; /* Centraliza as box */
+}
+
+
+.panel-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.9s ease; /* Animação mais lenta para abertura */
+}
+
+.panel.expanded .panel-content {
+    max-height: 500px; /* Limite alto para evitar corte */
+}
+
